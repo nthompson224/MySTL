@@ -53,7 +53,8 @@ public:
     int size();
     bool empty();
     int sort(std::function<bool> callback);
-    int find();
+    void shuffle();
+    int find(T value);
     T operator[](int index);
 };
 

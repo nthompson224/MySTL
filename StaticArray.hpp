@@ -7,6 +7,8 @@
 #ifndef StaticARRAY_HPP
 #define StaticARRAY_HPP
 
+#include <functional>
+
 template<typename T>
 class StaticArray {
     T* arr = nullptr;
@@ -47,6 +49,12 @@ public:
      * 
      */
     ~StaticArray();
+
+    int size();
+    bool empty();
+    int sort(std::function<bool> callback);
+    int find();
+    T operator[](int index);
 };
 
 #endif

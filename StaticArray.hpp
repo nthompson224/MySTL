@@ -20,15 +20,27 @@ public:
      * 
      * @param size size of the Staticarray
      */
-    StaticArray(int size) = default;
+    StaticArray(int size) {
+        if (size < 0) {
+            std::cerr << "Error in StaticArray: Cannot allocate a StaticArray of a negative size";
+            throw -1;
+        }
+        arr = new T[size];
+        length = size;
+    }
 
     /**
      * @brief Construct a new StaticArray object with preallocated Staticarray
      * 
-     * @param size size of the Staticarray
-     * @param data Staticarray data
+     * @param data array data
      */
-    StaticArray(int size, T* data);
+    StaticArray(T* data) {
+        length = sizeof(data) / sizeof(T) + 1;
+        arr = new T[length];
+        for (int i = 0; i < length; ++i) {
+            arr[i] = data[i];
+        }
+    }
 
     /**
      * @brief Copy constructor for a new StaticArray object
@@ -48,7 +60,9 @@ public:
      * @brief Destroy the StaticArray object
      * 
      */
-    ~StaticArray();
+    ~StaticArray() {
+        delete[] arr;
+    }
 
     int size();
     bool empty();
